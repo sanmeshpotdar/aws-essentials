@@ -1,0 +1,48 @@
+Step 1: Assign the IAM role with the following policies:
+
+1. AmazonSSMFullAccess
+2. CloudWatchAgentAdminPolicy
+
+Step 2: Download the CloudWatch agent through this command:
+
+```bash
+wget https://amazoncloudwatch-agent.s3.amazonaws.com/ubuntu/amd64/latest/amazon-cloudwatch-agent.deb
+```
+
+Step 3: Install the .deb file with dpkg command
+
+```bash
+sudo dpkg -i -E ./amazon-cloudwatch-agent.deb
+```
+
+Step 4: Launch the Amazon cloud watch agent config wizard:
+
+```bash
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-config-wizard 
+```
+
+Step 5: Install CollectD
+
+```bash
+ sudo apt-get install collectd
+```
+
+Step 6: Fetch the config JSON file
+
+```bash
+ sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a fetch-config -m ec2 -c file:/opt/aws/amazon-cloudwatch-agent/bin/config.json -s
+```
+
+Step 7: Check the amazon cloud watch agent is running
+
+```bash
+sudo /opt/aws/amazon-cloudwatch-agent/bin/amazon-cloudwatch-agent-ctl -a status
+```
+
+Resources:
+
+https://youtu.be/mIVluHNNioE?si=sXwOR_SzDsAf2TA1
+
+Download the cloud watch agent through the command line: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/download-cloudwatch-agent-commandline.html 
+
+https://medium.com/@stevernewman/installation-of-nginx-on-aws-ubuntu-instance-e73e72cb8450
